@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Register player",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": "Тест", "avatar": "🦊"},
+      "expectedStatus": 200,
+      "bodyMatcher": "none"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "tests": [
+    {
+      "name": "Get table state",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "bodyMatcher": "none"
+    }
+  ]
+}

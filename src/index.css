@@ -4,40 +4,44 @@
 
 @layer base {
   :root {
-    --background: 220 20% 7%;
-    --foreground: 210 20% 90%;
+    --background: 265 30% 8%;
+    --foreground: 0 0% 96%;
 
-    --card: 220 18% 11%;
-    --card-foreground: 210 20% 90%;
+    --card: 265 25% 12%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 220 18% 11%;
-    --popover-foreground: 210 20% 90%;
+    --popover: 265 25% 12%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 45 90% 55%;
-    --primary-foreground: 220 20% 7%;
+    --primary: 330 100% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 210 20% 80%;
+    --secondary: 265 20% 18%;
+    --secondary-foreground: 0 0% 85%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 265 20% 16%;
+    --muted-foreground: 265 10% 55%;
 
-    --accent: 45 90% 55%;
-    --accent-foreground: 220 20% 7%;
+    --accent: 190 100% 50%;
+    --accent-foreground: 265 30% 8%;
 
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 80% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
-    --ring: 45 90% 55%;
+    --border: 265 20% 22%;
+    --input: 265 20% 18%;
+    --ring: 330 100% 60%;
 
     --radius: 0.75rem;
 
-    --vip: 45 90% 55%;
-    --vip-glow: 45 90% 55%;
-    --table-felt: 150 40% 20%;
-    --chat-bg: 220 20% 9%;
+    --sidebar-background: 265 28% 10%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 330 100% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 265 20% 18%;
+    --sidebar-accent-foreground: 0 0% 85%;
+    --sidebar-border: 265 20% 22%;
+    --sidebar-ring: 330 100% 60%;
   }
 }
 
@@ -45,111 +49,157 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
     font-family: "Golos Text", sans-serif;
+    background: radial-gradient(
+      ellipse at 20% 0%,
+      hsl(280 60% 12%) 0%,
+      hsl(265 30% 8%) 60%
+    );
+    min-height: 100vh;
   }
-
   h1,
   h2,
   h3,
   .font-display {
     font-family: "Oswald", sans-serif;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
   }
 }
 
 @layer utilities {
   .felt-table {
     background: radial-gradient(
-      ellipse at center,
-      hsl(150 40% 22%) 0%,
-      hsl(150 35% 15%) 100%
+      ellipse at 30% 30%,
+      hsl(155 60% 22%) 0%,
+      hsl(155 50% 14%) 60%,
+      hsl(155 45% 10%) 100%
     );
-    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      inset 0 0 80px rgba(0, 0, 0, 0.6),
+      0 0 40px hsl(155 60% 15% / 0.5);
+  }
+
+  .neon-border {
+    border: 1px solid hsl(330 100% 60% / 0.4);
+    box-shadow:
+      0 0 15px hsl(330 100% 60% / 0.15),
+      inset 0 0 15px hsl(330 100% 60% / 0.05);
   }
 
   .vip-glow {
     box-shadow:
-      0 0 20px hsl(45 90% 55% / 0.4),
-      0 0 40px hsl(45 90% 55% / 0.15);
+      0 0 20px hsl(45 100% 55% / 0.5),
+      0 0 40px hsl(45 100% 55% / 0.2);
+    border-color: hsl(45 100% 55%) !important;
   }
 
   .seat-empty {
-    background: hsl(220 15% 15%);
-    border: 2px dashed hsl(220 15% 28%);
+    background: hsl(265 20% 14%);
+    border: 2px dashed hsl(265 15% 30%);
+    transition: all 0.2s;
+  }
+  .seat-empty-hover:hover {
+    border-color: hsl(330 100% 60% / 0.7) !important;
+    background: hsl(265 20% 18%) !important;
+    box-shadow: 0 0 14px hsl(330 100% 60% / 0.25) !important;
   }
 
   .seat-player {
-    background: hsl(220 18% 16%);
-    border: 2px solid hsl(220 15% 28%);
+    background: hsl(265 22% 17%);
+    border: 2px solid hsl(265 15% 28%);
   }
 
   .seat-vip {
-    background: hsl(40 30% 12%);
-    border: 2px solid hsl(45 90% 55%);
-    box-shadow: 0 0 15px hsl(45 90% 55% / 0.3);
+    background: hsl(45 40% 12%);
+    border: 2px solid hsl(45 100% 55%);
+    box-shadow: 0 0 18px hsl(45 100% 55% / 0.35);
   }
 
   .seat-me {
-    background: hsl(220 40% 18%);
-    border: 2px solid hsl(210 80% 60%);
-    box-shadow: 0 0 15px hsl(210 80% 60% / 0.25);
+    background: hsl(190 40% 14%);
+    border: 2px solid hsl(190 100% 50%);
+    box-shadow: 0 0 15px hsl(190 100% 50% / 0.3);
   }
 
-  .card-game {
-    background: white;
-    border-radius: 6px;
-    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
-    aspect-ratio: 2/3;
+  .coin-badge {
+    background: linear-gradient(135deg, hsl(45 100% 55%), hsl(38 90% 42%));
+    color: hsl(30 60% 12%);
+    font-weight: 800;
   }
 
-  .card-back {
-    background: linear-gradient(135deg, hsl(220 60% 25%), hsl(220 60% 18%));
-    border: 2px solid hsl(220 60% 35%);
+  .btn-primary {
+    background: linear-gradient(135deg, hsl(330 100% 58%), hsl(310 90% 50%));
+    color: white;
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    box-shadow: 0 4px 20px hsl(330 100% 60% / 0.35);
+    transition: all 0.2s;
+  }
+  .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 6px 28px hsl(330 100% 60% / 0.5);
+    transform: translateY(-1px);
+  }
+  .btn-primary:disabled {
+    opacity: 0.4;
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, hsl(45 100% 55%), hsl(38 90% 44%));
+    color: hsl(30 60% 12%);
+    font-weight: 700;
+    box-shadow: 0 4px 16px hsl(45 100% 55% / 0.35);
+    transition: all 0.2s;
+  }
+  .btn-gold:hover:not(:disabled) {
+    box-shadow: 0 6px 24px hsl(45 100% 55% / 0.5);
+    transform: translateY(-1px);
+  }
+  .btn-gold:disabled {
+    opacity: 0.4;
   }
 
   .chat-panel {
-    background: hsl(var(--chat-bg));
-    border-left: 1px solid hsl(var(--border));
+    background: hsl(265 28% 10%);
+    border-left: 1px solid hsl(265 20% 22%);
   }
 
   .scrollbar-thin::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
   }
   .scrollbar-thin::-webkit-scrollbar-track {
     background: transparent;
   }
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: hsl(220 15% 25%);
+    background: hsl(265 15% 30%);
     border-radius: 2px;
   }
 
-  .coin-badge {
-    background: linear-gradient(135deg, hsl(45 90% 55%), hsl(38 85% 45%));
-    color: hsl(30 50% 15%);
-    font-weight: 700;
-  }
-
-  .animate-deal {
-    animation: dealCard 0.3s ease-out;
+  .card-back {
+    background: linear-gradient(135deg, hsl(265 50% 25%), hsl(265 50% 18%));
+    border: 2px solid hsl(265 50% 35%);
   }
 
   @keyframes dealCard {
     from {
-      transform: translateY(-20px) scale(0.8);
+      transform: translateY(-15px) scale(0.85) rotate(-3deg);
       opacity: 0;
     }
     to {
-      transform: translateY(0) scale(1);
+      transform: translateY(0) scale(1) rotate(0);
       opacity: 1;
     }
+  }
+  .animate-deal {
+    animation: dealCard 0.28s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
   }
 
   @keyframes fadeInUp {
     from {
-      transform: translateY(20px);
+      transform: translateY(12px);
       opacity: 0;
     }
     to {
@@ -158,33 +208,73 @@
     }
   }
 
-  .animate-fade-in-up {
-    animation: fadeInUp 0.4s ease-out;
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.92);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
-  @keyframes pulse-glow {
+  @keyframes pulseGold {
     0%,
     100% {
-      box-shadow: 0 0 10px hsl(45 90% 55% / 0.3);
+      box-shadow: 0 0 12px hsl(45 100% 55% / 0.4);
     }
     50% {
-      box-shadow: 0 0 25px hsl(45 90% 55% / 0.6);
+      box-shadow:
+        0 0 28px hsl(45 100% 55% / 0.7),
+        0 0 50px hsl(45 100% 55% / 0.2);
     }
   }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+  .animate-pulse-gold {
+    animation: pulseGold 2s ease-in-out infinite;
   }
 
-  .game-chip {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 3px dashed rgba(255, 255, 255, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 700;
+  @keyframes tickerMove {
+    0% {
+      transform: translateX(100vw);
+    }
+    100% {
+      transform: translateX(-200%);
+    }
+  }
+  .ticker-text {
+    animation: tickerMove 30s linear infinite;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .neon-text-pink {
+    color: hsl(330 100% 65%);
+    text-shadow: 0 0 10px hsl(330 100% 60% / 0.6);
+  }
+  .neon-text-cyan {
+    color: hsl(190 100% 55%);
+    text-shadow: 0 0 10px hsl(190 100% 50% / 0.6);
+  }
+  .neon-text-gold {
+    color: hsl(45 100% 58%);
+    text-shadow: 0 0 8px hsl(45 100% 55% / 0.5);
   }
 }
