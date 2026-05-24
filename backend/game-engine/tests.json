@@ -1,0 +1,11 @@
+{
+  "tests": [
+    {
+      "name": "Get game state",
+      "method": "GET",
+      "path": "/?session_id=00000000-0000-0000-0000-000000000000",
+      "expectedStatus": 404,
+      "bodyMatcher": "none"
+    }
+  ]
+}

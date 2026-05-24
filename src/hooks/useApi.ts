@@ -3,6 +3,7 @@ const URLS = {
   chat: 'https://functions.poehali.dev/0e6e282d-54d9-41af-917f-813b0099de97',
   leaderboard: 'https://functions.poehali.dev/2b8e6b97-c34c-47ef-b3ee-f267956316e2',
   table: 'https://functions.poehali.dev/fc573b81-c4c8-478b-bb98-9da78a27b97d',
+  game: 'https://functions.poehali.dev/436ea5a3-8452-48e4-ac82-669f2803509e',
 };
 
 export const api = {
@@ -79,6 +80,20 @@ export const api = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'change_game', session_id: sessionId, player_id: playerId, game_id: gameId }),
+    });
+    return r.json();
+  },
+
+  async getGameState(sessionId: string) {
+    const r = await fetch(`${URLS.game}?session_id=${sessionId}`);
+    return r.json();
+  },
+
+  async gameAction(sessionId: string, playerId: string, action: string, extra: Record<string, unknown> = {}) {
+    const r = await fetch(URLS.game, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId, player_id: playerId, action, ...extra }),
     });
     return r.json();
   },
